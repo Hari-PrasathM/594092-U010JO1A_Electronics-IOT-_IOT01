@@ -1,0 +1,36 @@
+import requests
+
+# Define the channel ID and read API key
+channel_id = "2030597"
+read_api_key = "20Z31EOVYNP4XBEM"
+b1='1.4705'
+c1='1.4705'
+# Define the URL for the GET request
+url = "https://api.thingspeak.com/channels/{}/fields/1.json?api_key={}".format(channel_id, read_api_key)
+
+# Make the GET request
+response = requests.get(url)
+
+# Check the status code of the response to make sure the request was successful
+if response.status_code == 200:
+    # Get the JSON data from the response
+    data = response.json()
+
+    # Access the data from the response
+    feeds = data["feeds"]
+    for feed in feeds:
+        # print("Timestamp: {}".format(feed["created_at"]))
+        a1="{}".format(feed["field1"])
+        if a1>="1.4705":
+            print("YOU ARE ACCELERATING BEYOND STIPULATED LEVEL SLOW DOWN!!!")
+        if a1-b1>="0" and a1-c1>='0':
+             print("Your Current Acceleration is {}".a)
+        else :
+             print("You are slowing down")
+        
+        print(a1)
+        c1=b1
+
+
+else:
+    print("Request failed with status code {}".format(response.status_code))
